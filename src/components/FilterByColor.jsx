@@ -9,9 +9,7 @@ export default function FilterByColor() {
       let [colorFilters, setColorFilters] = useState([])
       let dispatch = useDispatch()
       
-      useEffect(()=>{
-          dispatch(filter_by_color({filters : colorFilters, main_state : state}))
-      },[colorFilters,state])
+      dispatch(filter_by_color({filters : colorFilters, main_state : state}))
       function handleChange(e){
           let name = e.target.name
           if(colorFilters.includes(name)){
@@ -22,6 +20,7 @@ export default function FilterByColor() {
           }
           let arr = [...colorFilters]
           setColorFilters([...arr,name])
+          
           return 
       }
   return (

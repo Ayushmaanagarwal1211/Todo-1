@@ -7,13 +7,11 @@ export default function FilterByStatus() {
   let dispatch = useDispatch()
   let tasks=  useSelector(state=>getState(state))
   let [filters,setFilters] = useState("all")
-  useEffect(()=>{
-    dispatch(filter_by_status({filters,tasks}))
-  },[filters,tasks])
+  dispatch(filter_by_status({filters,tasks}))
   function handleChange(e){
     e = e.target
     if(e.name !== filters){
-      setFilters(e.name)
+      setFilters(e.name)      
     }
   }
   return (
