@@ -9,12 +9,14 @@ function getId(){
 }
 let filter_slice = createSlice({
     initialState:{
-        tasks : []
+        tasks : [],
+        filter : "all"
     },
     name : "todo",
     reducers : {
         filter_by_status : (state,action)=>{
             let {filters ,tasks} = action.payload
+            state.filter  = filters
             if(filters == "all"){
                 state.tasks = [...tasks]
                 return 
@@ -24,7 +26,14 @@ let filter_slice = createSlice({
 
         },
         filter_by_color : (state,action) =>{
-
+            let {filters, main_state} = action.payload
+            if(filters.length == 0 ){                
+                let arr = main_state.filter(data=>state.filter == data.status || state.filter=="all")
+                state.tasks = [...arr]
+                return 
+            }
+            let ans = main_state.filter((data) => filters.includes(data.color) && (data.status == state.filter || state.filter == "all"))
+            state.tasks = [...ans]
         }
     }
 })
