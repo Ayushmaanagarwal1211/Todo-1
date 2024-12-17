@@ -5,11 +5,10 @@ import { filter_by_color } from '../../reducer/filterSlice'
 import { getState } from '../../reducer/slice'
 
 export default function FilterByColor() {
-  let state = useSelector(state=>getState(state))
       let [colorFilters, setColorFilters] = useState([])
       let dispatch = useDispatch()
       
-      dispatch(filter_by_color({filters : colorFilters, main_state : state}))
+      dispatch(filter_by_color({filters : colorFilters}))
       function handleChange(e){
           let name = e.target.name
           if(colorFilters.includes(name)){
@@ -20,7 +19,6 @@ export default function FilterByColor() {
           }
           let arr = [...colorFilters]
           setColorFilters([...arr,name])
-          
           return 
       }
   return (
