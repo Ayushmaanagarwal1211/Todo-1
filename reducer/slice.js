@@ -25,7 +25,8 @@ let slice = createSlice({
         },
         editTask : (state,action) =>{
             let {id,input} = action.payload
-            state.tasks[id] = {...state.tasks[id],task:input}
+            let index = state.tasks.findIndex((data)=>data.id == id)
+            state.tasks[index] = {...state.tasks[index],task:input}
             setDataToBackend(state.tasks)
             return 
         },
