@@ -11,9 +11,8 @@ export default function Tasks() {
     <div className='w-[100%] '>
       {
        filter_tasks?.length>0 &&  filter_tasks.map(data=>{
-        console.log(data.color)
         if((choices.includes(data.color) || choices.length==0) && (data.status == filters || filters == "all")){
-          return <Task task={data}/> 
+          return <Task key={data.id} task={data}/> 
         }
 })
       }
