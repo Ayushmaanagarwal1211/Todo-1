@@ -14,50 +14,36 @@ let slice = createSlice({
     name : "todo",
     reducers : {
         addTask : (state,action)=>{
-            let arr = [...state.tasks]
-            arr.push({id:getId(),...action.payload})
-            setDataToBackend(arr)
-            state.tasks = [...arr]
+            state.tasks.push({id:getId(),...action.payload})
+            setDataToBackend( state.tasks)
         },
         deleteTask : (state,action)=>{
             let {task} = action.payload
-            let arr = [...state.tasks]
-            arr = arr.filter(data=>data.id !== task.id)
-            state.tasks = [...arr]
-            setDataToBackend([...arr])
+            state.tasks = state.tasks.filter(data=>data.id !== task.id)
+            setDataToBackend(state.tasks)
             return 
         },
         editTask : (state,action) =>{
-            let {task,input} = action.payload
-            let arr = [...state.tasks]
-            console.log(task.id)
-            arr[task.id] = {...arr[task.id],task:input}
-            state.tasks = [...arr]
-            setDataToBackend([...arr])
+            let {id,input} = action.payload
+            state.tasks[id] = {...state.tasks[id],task:input}
+            setDataToBackend(state.tasks)
             return 
         },
         changeStatus : (state,action) => {
             let {id,status} = action.payload
-            let arr = [...state.tasks]
-            let index = arr.findIndex((data)=>data.id == id)
-            arr[index] = {...arr[index],status}
-            state.tasks = arr
-            setDataToBackend(arr)
-
-        },
-        changeStatusForAll : (state,action) =>{
+            let index = state.tasks.findIndex((data)=>data.id == id)
+            state.tasks[index] = {...state.tasks[index],status}
+            setDataToBackend(state.tasks)
 
         },
         fill : (state)=>{
             state.tasks = getDateFromBackend()
         },
         markAllCompleted:(state,action)=>{
-            let arr = [...state.tasks]
-            console.log(arr)
-            for(let i of arr){
+            for(let i of state.tasks){
                 i.status = "completed"
             }
-            setDataToBackend([...arr])
+            setDataToBackend(state.tasks)
             return 
         },
         clearCompleted : (state,action)=>{

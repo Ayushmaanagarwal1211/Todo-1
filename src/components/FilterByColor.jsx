@@ -5,21 +5,10 @@ import { filter_by_color } from '../../reducer/filterSlice'
 import { getState } from '../../reducer/slice'
 
 export default function FilterByColor() {
-      let [colorFilters, setColorFilters] = useState([])
       let dispatch = useDispatch()
-      
-      dispatch(filter_by_color({filters : colorFilters}))
       function handleChange(e){
           let name = e.target.name
-          if(colorFilters.includes(name)){
-              let arr = [...colorFilters]
-              arr = arr.filter(data=>data!==name)
-              setColorFilters([...arr])
-              return 
-          }
-          let arr = [...colorFilters]
-          setColorFilters([...arr,name])
-          return 
+          dispatch(filter_by_color(name))
       }
   return (
     <div className='flex-1 justify-center flex items-center flex-col gap-2'>

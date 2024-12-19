@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { getDateFromBackend, setDataToBackend } from '../service/localStorage'
 
 let filter_slice = createSlice({
     initialState:{
@@ -9,17 +8,22 @@ let filter_slice = createSlice({
     name : "todo",
     reducers : {
         filter_by_status : (state,action)=>{
-            let {filters } = action.payload
-            state.filter  = filters
+            if(action.payload == "all" || action.payload == "active" ||action.payload == "completed"  ){
+                state.filter  = action.payload
+            }
         },
         filter_by_color : (state,action) =>{
-            let {filters} = action.payload
-            state.choice = [...filters]
+            if(!["green","orange","blue","purple","red"].includes(action.payload.toLowerCase())){
+                return 
+            }
+            if(state.choice.includes(action.payload)){
+                state.choice = state.choice.filter((data)=>data!==action.payload)
+                return
+            }
+            state.choice.push(action.payload)
         }
     }
 })
-export function getState (state){
-    return state.task.tasks
-}
+
 export const {filter_by_status,filter_by_color} = filter_slice.actions
 export default filter_slice.reducer

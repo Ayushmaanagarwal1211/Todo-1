@@ -4,8 +4,6 @@ import { getState } from '../../reducer/slice'
 
 export default function RemainingTodos() {
   let tasks = useSelector(state=>getState(state))
-  let [count,setCount] = useState(0)
-
   return (
     <div className='flex-1 flex justify-center items-center flex-col gap-2'>
       <h1>Remaining Todos</h1>

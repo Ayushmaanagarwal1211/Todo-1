@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import { useDispatch, useSelector } from 'react-redux'
-import { fill, getState } from '../reducer/slice'
+import { useDispatch } from 'react-redux'
+import { fill } from '../reducer/slice'
 import Input from './components/Input'
 import Tasks from './components/Tasks'
 import Actions from './components/Actions'
@@ -11,8 +11,6 @@ import FilterByStatus from './components/FilterByStatus'
 import FilterByColor from './components/FilterByColor'
 
 function App() {
-  const [count, setCount] = useState(0)
-  let task = useSelector(state=>getState(state))
   let dispatch = useDispatch()
   useEffect(()=>{
       dispatch(fill())

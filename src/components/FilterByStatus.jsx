@@ -5,13 +5,9 @@ import { getState } from '../../reducer/slice'
 
 export default function FilterByStatus() {
   let dispatch = useDispatch()
-  let [filters,setFilters] = useState("all")
-  dispatch(filter_by_status({filters}))
+  let filters = useSelector(state=>state.filter_tasks.filter)
   function handleChange(e){
-    e = e.target
-    if(e.name !== filters){
-      setFilters(e.name)      
-    }
+      dispatch(filter_by_status(e.target.name))
   }
   return (
     <div className='flex-1 flex flex-col justify-center'>

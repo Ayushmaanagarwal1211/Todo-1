@@ -5,7 +5,6 @@ import { clearCompleted, markAllCompleted } from '../../reducer/slice'
 export default function Actions() {
   let dispatch = useDispatch()
   function handleMarkAllCompleted(){
-    console.log('taskssss')
       dispatch(markAllCompleted())
   }
   function handleClearAll(){
